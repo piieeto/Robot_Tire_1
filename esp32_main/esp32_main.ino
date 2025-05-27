@@ -29,6 +29,7 @@ int currentPWM;// aktuelle Geschwindigkeit, wird immer aktualisiert
 int targetPWM; // Zielgeschwindigkeit
 bool motorsAreStopping = false;
 bool directontrolActive = false;
+float motorCorrection[4] = {1.00, 1.00, 1.00, 1.00};
 
 void setup() {
   Serial.begin(115200);
@@ -276,13 +277,20 @@ void controlMotorsDirect(int left, int right) {
   setMotor(4, rightForward);
 
   // PWM setzen (Betrag der Werte)
-  ledcWrite(CH_PWMA_1, abs(left)); // Motor 1 (vorne links)
-  ledcWrite(CH_PWMA_2, abs(left)); // Motor 3 (hinten links)
-  ledcWrite(CH_PWMB_1, abs(right)); // Motor 2 (vorne rechts)
-  ledcWrite(CH_PWMB_2, abs(right)); // Motor 4 (hinten rechts)
+  ledcWrite(CH_PWMA_1, applyCorrection(1, left)); // Motor 1 (vorne links)
+  ledcWrite(CH_PWMA_2, applyCorrection(3, left)); // Motor 3 (hinten links)
+  ledcWrite(CH_PWMB_1, applyCorrection(2, right)); // Motor 2 (vorne rechts)
+  ledcWrite(CH_PWMB_2, applyCorrection(4, right)); // Motor 4 (hinten rechts)
 
   Serial.print("🎯 Direktsteuerung: L=");
   Serial.print(left);
   Serial.print(" R=");
   Serial.println(right);
+}
+
+int applyCorrection(int motorNum, int basePWM) {
+  float factor = motorCorrection[motorNum - 1];
+  int corrected = int(abs(basePWM) * factor);
+  if (corrected > 255) corrected = 255;
+  return corrected; 
 }

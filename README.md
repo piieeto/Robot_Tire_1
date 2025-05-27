@@ -1,4 +1,4 @@
-# 🤖 Robot Tire — ESP32 gesteuerter 4-Rad-Roboter mit Gamepad- und Konsolensteuerung
+# 🤖 Robot — ESP32 gesteuerter 4-Rad-Roboter mit Gamepad- und Konsolensteuerung
 
 Dieses Projekt enthält den Code für einen differenziell gesteuerten Roboter mit vier DC-Motoren, einem ESP32 , Raspberry Pi 4b und zwei TB6612FNG-Motortreibern.  
 Der Roboter kann entweder per Konsole (über USB) oder über ein Bluetooth-Gamepad (z. B. 8BitDo Ultimate) gesteuert werden.

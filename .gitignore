@@ -1,0 +1,20 @@
+# VS Code
+.vscode/
+*.code-workspace
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.log
+
+# Arduino
+*.elf
+*.hex
+*.bin
+*.ino.*
+build/
+
+# System
+.DS_Store
+Thumbs.db
